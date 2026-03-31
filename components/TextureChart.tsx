@@ -12,6 +12,15 @@ import {
   YAxis,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 const textureData = [
   { sample: 'Sample 1', crispy: 52.08, force: 35.42, powdery: 6.25, soft: 6.25 },
@@ -66,12 +75,29 @@ function TextureTooltip({ active, payload, label }: TextureTooltipProps) {
 }
 
 export function TextureChart() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Card className="border-slate-200/80 bg-white">
-      <CardHeader className="pb-2">
+    <>
+      <Card
+        className="border-slate-200/80 bg-white hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer"
+        onClick={() => setOpen(true)}
+      >
+        <CardHeader className="pb-2 flex flex-row items-start justify-between gap-4">
         <CardTitle className="text-base text-slate-900">
           Physical Degradation (Bite & Texture)
         </CardTitle>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8"
+          onClick={(e) => {
+            e.stopPropagation()
+            setOpen(true)
+          }}
+        >
+          View Detailed Analysis
+        </Button>
       </CardHeader>
       <CardContent>
         <div className="mt-4">
@@ -88,12 +114,12 @@ export function TextureChart() {
               <Tooltip content={<TextureTooltip />} />
               <Legend wrapperStyle={{ fontSize: '12px' }} />
               {textureSeries.map((series) => (
-                <Bar key={series.key} dataKey={series.key} name={series.label} stackId="texture">
+                <Bar key={series.key} dataKey={series.key} name={series.label} stackId="a">
                   {textureData.map((entry, index) => (
                     <Cell
                       key={`${entry.sample}-${series.key}-${index}`}
-                      fill={entry.sample === 'Sample 3' ? series.color : '#94a3b8'}
-                      fillOpacity={entry.sample === 'Sample 3' ? 1 : 0.55}
+                      fill={series.color}
+                      fillOpacity={entry.sample === 'Sample 3' ? 1 : 0.65}
                     />
                   ))}
                 </Bar>
@@ -103,6 +129,28 @@ export function TextureChart() {
           </div>
         </div>
       </CardContent>
-    </Card>
+      </Card>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Texture comparison — detailed interpretation</DialogTitle>
+            <DialogDescription>
+              Where “bite mechanics” create or destroy repeat intent.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 text-sm text-slate-700">
+            <p>
+              <span className="font-semibold text-slate-900">Sample 3’s dissolve/crunch balance</span> supports repeat
+              behavior: strong acoustic crunch without heavy oil drag.
+            </p>
+            <p>
+              <span className="font-semibold text-slate-900">Sample 4’s texture is structurally compromised</span> and is
+              consistent with the manufacturing oil retention defect that suppresses perceived crispness.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
