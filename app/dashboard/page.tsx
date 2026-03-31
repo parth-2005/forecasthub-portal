@@ -13,40 +13,34 @@ import { IntelligenceReportCard } from '@/components/IntelligenceReportCard'
 export default function DashboardPage() {
   return (
     <PortalLayout>
-      <div className="p-8">
-        <div className="mb-8">
+      <div className="flex flex-col gap-8 p-8">
+        <div>
           <CriticalAlert />
         </div>
 
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
             Executive Intelligence Dashboard: Cream & Onion Segment
           </h1>
         </div>
 
-        <div className="mb-8">
+        <div>
           <PlatformMetricCard />
         </div>
 
-        <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div>
-            <StickinessChart />
-          </div>
-          <div>
-            <RetailRoutingChart />
-          </div>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <StickinessChart />
+          <RetailRoutingChart />
         </div>
 
-        <div className="mb-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <FlavorMatrixChart />
           <TextureChart />
           <OilPenaltyChart />
         </div>
 
         <div>
-          <div className="max-w-5xl">
-            <IntelligenceReportCard />
-          </div>
+          <IntelligenceReportCard />
         </div>
       </div>
     </PortalLayout>

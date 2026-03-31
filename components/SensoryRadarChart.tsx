@@ -1,77 +1,95 @@
 'use client'
 
 import {
-  RadarChart,
-  PolarGrid,
   PolarAngleAxis,
+  PolarGrid,
   PolarRadiusAxis,
   Radar,
-  Legend,
+  RadarChart,
   ResponsiveContainer,
   Tooltip,
 } from 'recharts'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-interface SensoryRadarChartProps {
-  title: string
-  data: Array<{
-    axis: string
-    sample3: number
-    sample4: number
+const radarData = [
+  { subject: 'Acidic/Tangy', sample3: 85, average: 40 },
+  { subject: 'Structural Rigidity', sample3: 65, average: 60 },
+  { subject: 'Dissolve Rate', sample3: 90, average: 45 },
+  { subject: 'Oil Retention', sample3: 15, average: 55 },
+  { subject: 'Acoustic Crunch', sample3: 80, average: 75 },
+]
+
+interface RadarTooltipProps {
+  active?: boolean
+  payload?: Array<{
+    dataKey?: string
+    value?: number
+    name?: string
   }>
+  label?: string
 }
 
-export function SensoryRadarChart({ title, data }: SensoryRadarChartProps) {
+function RadarTooltip({ active, payload, label }: RadarTooltipProps) {
+  if (!active || !payload?.length) {
+    return null
+  }
+
   return (
-    <Card className="p-6 bg-white border-gray-200">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">{title}</h3>
-      <ResponsiveContainer width="100%" height={350}>
-        <RadarChart
-          data={data}
-          margin={{ top: 20, right: 80, bottom: 20, left: 80 }}
-        >
-          <PolarGrid stroke="#e5e7eb" />
-          <PolarAngleAxis
-            dataKey="axis"
-            stroke="#6b7280"
-            style={{ fontSize: '11px', fontWeight: 500 }}
-          />
-          <PolarRadiusAxis
-            stroke="#d1d5db"
-            style={{ fontSize: '10px' }}
-          />
-          <Radar
-            name="Sample 3 (Winner)"
-            dataKey="sample3"
-            stroke="#059669"
-            fill="#059669"
-            fillOpacity={0.25}
-            strokeWidth={2}
-          />
-          <Radar
-            name="Sample 4 (Critical)"
-            dataKey="sample4"
-            stroke="#dc2626"
-            fill="#dc2626"
-            fillOpacity={0.25}
-            strokeWidth={2}
-          />
-          <Legend
-            wrapperStyle={{ paddingTop: '20px' }}
-            verticalAlign="bottom"
-            height={36}
-          />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: '#fff',
-              border: '1px solid #e5e7eb',
-              borderRadius: '6px',
-            }}
-            labelStyle={{ color: '#111827' }}
-            formatter={(value) => value.toFixed(2)}
-          />
-        </RadarChart>
-      </ResponsiveContainer>
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-md">
+      <p className="mb-2 text-sm font-semibold text-slate-900">{label}</p>
+      <div className="space-y-1">
+        {payload.map((entry) => (
+          <p key={entry.dataKey} className="text-xs text-slate-700">
+            <span
+              className="font-medium"
+              style={{
+                color: entry.dataKey === 'sample3' ? '#0ea5e9' : '#94a3b8',
+              }}
+            >
+              {entry.dataKey === 'sample3' ? 'Sample 3' : 'Category Avg'}:
+            </span>{' '}
+            {entry.value}
+          </p>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function SensoryRadarChart() {
+  return (
+    <Card className="border-slate-200/80 bg-white">
+      <CardHeader>
+        <CardTitle className="text-lg text-slate-900">
+          Multi-Dimensional Sensory Matrix (Sample 3 vs Category Average)
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="h-[400px] w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart data={radarData} margin={{ top: 20, right: 80, bottom: 20, left: 80 }}>
+              <PolarGrid stroke="#e2e8f0" />
+              <PolarAngleAxis dataKey="subject" stroke="#64748b" style={{ fontSize: '12px' }} />
+              <PolarRadiusAxis stroke="#64748b" style={{ fontSize: '12px' }} domain={[0, 100]} />
+              <Radar
+                name="Sample 3"
+                dataKey="sample3"
+                stroke="#0ea5e9"
+                fill="#0ea5e9"
+                fillOpacity={0.5}
+              />
+              <Radar
+                name="Category Average"
+                dataKey="average"
+                stroke="#94a3b8"
+                fill="#94a3b8"
+                fillOpacity={0.3}
+              />
+              <Tooltip content={<RadarTooltip />} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+      </CardContent>
     </Card>
   )
 }

@@ -50,14 +50,15 @@ function OilPenaltyTooltip({ active, payload, label }: OilTooltipProps) {
 export function OilPenaltyChart() {
   return (
     <Card className="border-slate-200/80 bg-white">
-      <CardHeader>
+      <CardHeader className="pb-2">
         <CardTitle className="text-base text-slate-900">
           Manufacturing Audit: Fryer Oil Retention
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={310}>
-          <BarChart
+        <div className="h-[300px] w-full mt-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
             data={oilPenaltyData}
             layout="vertical"
             margin={{ top: 6, right: 16, left: 16, bottom: 6 }}
@@ -77,6 +78,7 @@ export function OilPenaltyChart() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </CardContent>
     </Card>
   )

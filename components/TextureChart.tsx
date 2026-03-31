@@ -68,14 +68,15 @@ function TextureTooltip({ active, payload, label }: TextureTooltipProps) {
 export function TextureChart() {
   return (
     <Card className="border-slate-200/80 bg-white">
-      <CardHeader>
+      <CardHeader className="pb-2">
         <CardTitle className="text-base text-slate-900">
           Physical Degradation (Bite & Texture)
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={310}>
-          <BarChart data={textureData} stackOffset="expand" margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
+        <div className="h-[300px] w-full mt-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={textureData} stackOffset="expand" margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
             <XAxis dataKey="sample" stroke="#64748b" style={{ fontSize: '12px' }} />
             <YAxis
@@ -94,6 +95,7 @@ export function TextureChart() {
             ))}
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </CardContent>
     </Card>
   )

@@ -56,14 +56,15 @@ function ChartTooltip({ active, payload, label }: ChartTooltipProps) {
 export function StickinessChart() {
   return (
     <Card className="border-slate-200/80 bg-white">
-      <CardHeader>
+      <CardHeader className="pb-2">
         <CardTitle className="text-lg text-slate-900">
           Multi-Variable Stickiness Score (Consumer Loyalty)
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={320}>
-          <BarChart data={stickinessData} margin={{ top: 8, right: 16, left: 0, bottom: 12 }}>
+        <div className="h-[300px] w-full mt-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={stickinessData} margin={{ top: 8, right: 16, left: 0, bottom: 12 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
             <XAxis
               dataKey="sample"
@@ -82,6 +83,7 @@ export function StickinessChart() {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </CardContent>
     </Card>
   )

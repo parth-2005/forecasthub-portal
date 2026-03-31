@@ -74,16 +74,16 @@ export function PlatformMetricCard() {
             key={metric.title}
             className="border-slate-200/80 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
           >
-            <CardContent className="space-y-4 px-6">
+            <CardContent className="p-4 space-y-3">
               <div className="flex items-start justify-between gap-4">
-                <p className="text-sm font-medium text-slate-600">{metric.title}</p>
+                <p className="text-xs font-medium uppercase tracking-wide text-slate-600">{metric.title}</p>
                 <span className={`rounded-lg p-2.5 ${metric.iconClass}`}>
                   <Icon className="h-4 w-4" />
                 </span>
               </div>
               <div>
                 <p className="text-3xl font-bold tracking-tight text-slate-900">{metric.value}</p>
-                <p className="mt-1 text-xs text-slate-500">{metric.label}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{metric.label}</p>
               </div>
               <div className="space-y-1">
                 {metric.trend ? (

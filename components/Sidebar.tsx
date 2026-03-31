@@ -2,11 +2,17 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { BarChart3, Grid3x3, Lock, Bookmark, Radio, LogOut } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export function Sidebar() {
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const navItems = [
     {
@@ -49,7 +55,7 @@ export function Sidebar() {
       <nav className="flex-1 p-4 space-y-2">
         {navItems.map((item) => {
           const Icon = item.icon
-          const isActive = pathname === item.href
+          const isActive = mounted && pathname === item.href
           return (
             <Link
               key={item.href}
