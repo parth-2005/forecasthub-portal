@@ -10,63 +10,79 @@ import {
   ResponsiveContainer,
   Cell,
 } from 'recharts'
-import { Card } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
-interface DataPoint {
-  name: string
-  value: number
-  highlight?: boolean
+const stickinessData = [
+  { sample: 'Sample 1', score: 60.12, status: 'Mass Market' },
+  { sample: 'Sample 2', score: 59.88, status: 'Mass Market' },
+  { sample: 'Sample 3', score: 76.56, status: 'Market Dominant' },
+  { sample: 'Sample 4', score: 42.19, status: 'Critical Failure' },
+]
+
+interface TooltipPayload {
+  payload?: {
+    score: number
+    status: string
+  }
 }
 
-interface StickinessChartProps {
-  title: string
-  data: DataPoint[]
-  successColor?: string
-  failureColor?: string
-  defaultColor?: string
+interface ChartTooltipProps {
+  active?: boolean
+  payload?: TooltipPayload[]
+  label?: string
 }
 
-export function StickinessChart({
-  title,
-  data,
-  successColor = '#059669',
-  failureColor = '#dc2626',
-  defaultColor = '#4f46e5',
-}: StickinessChartProps) {
+function ChartTooltip({ active, payload, label }: ChartTooltipProps) {
+  if (!active || !payload?.length || !payload[0]?.payload) {
+    return null
+  }
+
+  const { score, status } = payload[0].payload
+
   return (
-    <Card className="p-6 bg-white border-gray-200">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">{title}</h3>
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-          <XAxis
-            dataKey="name"
-            stroke="#9ca3af"
-            style={{ fontSize: '12px', fontWeight: 500 }}
-          />
-          <YAxis stroke="#9ca3af" style={{ fontSize: '12px' }} />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: '#fff',
-              border: '1px solid #e5e7eb',
-              borderRadius: '6px',
-            }}
-            labelStyle={{ color: '#111827' }}
-            formatter={(value) => [`${value}`, 'Score']}
-          />
-          <Bar dataKey="value" radius={[8, 8, 0, 0]} name="Stickiness Score">
-            {data.map((entry, index) => {
-              if (entry.name.includes('3')) {
-                return <Cell key={`cell-${index}`} fill={successColor} />
-              }
-              if (entry.name.includes('4')) {
-                return <Cell key={`cell-${index}`} fill={failureColor} />
-              }
-              return <Cell key={`cell-${index}`} fill={defaultColor} />
-            })}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-md">
+      <p className="text-sm font-semibold text-slate-900">{label}</p>
+      <p className="text-xs text-slate-600">Score: {score.toFixed(2)}</p>
+      <p className="text-xs text-slate-600">Status: {status}</p>
+    </div>
+  )
+}
+
+export function StickinessChart() {
+  return (
+    <Card className="border-slate-200/80 bg-white">
+      <CardHeader>
+        <CardTitle className="text-lg text-slate-900">
+          Multi-Variable Stickiness Score (Consumer Loyalty)
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ResponsiveContainer width="100%" height={320}>
+          <BarChart data={stickinessData} margin={{ top: 8, right: 16, left: 0, bottom: 12 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <XAxis
+              dataKey="sample"
+              stroke="#64748b"
+              style={{ fontSize: '12px', fontWeight: 500 }}
+            />
+            <YAxis domain={[0, 100]} stroke="#64748b" style={{ fontSize: '12px' }} />
+            <Tooltip content={<ChartTooltip />} cursor={{ fill: 'rgba(148, 163, 184, 0.12)' }} />
+            <Bar dataKey="score" radius={[10, 10, 0, 0]} name="Stickiness Score">
+              {stickinessData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.sample === 'Sample 3' ? '#0ea5e9' : '#94a3b8'}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
     </Card>
   )
 }

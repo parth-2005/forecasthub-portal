@@ -1,42 +1,107 @@
 import React from 'react'
-import { LucideIcon } from 'lucide-react'
+import {
+  Activity,
+  ArrowUpRight,
+  CheckCircle2,
+  Target,
+  TrendingUp,
+  type LucideIcon,
+} from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
 
-interface PlatformMetricCardProps {
+interface MetricItem {
   title: string
-  value: string | number
-  subtitle: string
+  value: string
+  label: string
+  trend?: string
   icon: LucideIcon
-  accent?: 'indigo' | 'emerald' | 'amber' | 'slate'
+  iconClass: string
+  trendIcon?: LucideIcon
+  trendClass?: string
+  subtext?: string
 }
 
-export function PlatformMetricCard({
-  title,
-  value,
-  subtitle,
-  icon: Icon,
-  accent = 'indigo',
-}: PlatformMetricCardProps) {
-  const accentColors = {
-    indigo: 'text-indigo-600 bg-indigo-50',
-    emerald: 'text-emerald-600 bg-emerald-50',
-    amber: 'text-amber-600 bg-amber-50',
-    slate: 'text-slate-600 bg-slate-50',
-  }
+const metrics: MetricItem[] = [
+  {
+    title: 'Verified Campus Nodes',
+    value: '44',
+    label: 'Active Ground Nodes',
+    trend: '+12% this month',
+    icon: TrendingUp,
+    iconClass: 'text-emerald-600 bg-emerald-50',
+    trendIcon: ArrowUpRight,
+    trendClass: 'text-emerald-600',
+  },
+  {
+    title: 'Distinct Evaluations',
+    value: '176',
+    label: 'Double-Blind Sensory Tests',
+    trend: 'High Confidence',
+    icon: CheckCircle2,
+    iconClass: 'text-blue-600 bg-blue-50',
+    trendIcon: CheckCircle2,
+    trendClass: 'text-blue-600',
+  },
+  {
+    title: 'Active Market Signals',
+    value: '12,450',
+    label: 'Passive Social/Digital Data Points',
+    trend: 'Live Sync',
+    icon: Activity,
+    iconClass: 'text-cyan-600 bg-cyan-50',
+    trendIcon: Activity,
+    trendClass: 'text-cyan-600',
+  },
+  {
+    title: 'Category Focus',
+    value: 'Salty Snacks',
+    label: 'Cream & Onion Segment',
+    icon: Target,
+    iconClass: 'text-violet-600 bg-violet-50',
+    subtext: 'Sample Size n=4',
+  },
+]
 
-  const colorClass = accentColors[accent]
-
+export function PlatformMetricCard() {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 flex flex-col">
-      <div className="flex items-start justify-between mb-4">
-        <h3 className="text-sm font-medium text-gray-600">{title}</h3>
-        <div className={`p-3 rounded-lg ${colorClass}`}>
-          <Icon className="w-5 h-5" />
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <p className="text-3xl font-bold text-gray-900 mb-1">{value}</p>
-        <p className="text-xs text-gray-500">{subtitle}</p>
-      </div>
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+      {metrics.map((metric) => {
+        const Icon = metric.icon
+        const TrendIcon = metric.trendIcon
+
+        return (
+          <Card
+            key={metric.title}
+            className="border-slate-200/80 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <CardContent className="space-y-4 px-6">
+              <div className="flex items-start justify-between gap-4">
+                <p className="text-sm font-medium text-slate-600">{metric.title}</p>
+                <span className={`rounded-lg p-2.5 ${metric.iconClass}`}>
+                  <Icon className="h-4 w-4" />
+                </span>
+              </div>
+              <div>
+                <p className="text-3xl font-bold tracking-tight text-slate-900">{metric.value}</p>
+                <p className="mt-1 text-xs text-slate-500">{metric.label}</p>
+              </div>
+              <div className="space-y-1">
+                {metric.trend ? (
+                  <p className={`flex items-center gap-1 text-xs font-semibold ${metric.trendClass}`}>
+                    {TrendIcon ? (
+                      <TrendIcon
+                        className={`h-3.5 w-3.5 ${metric.trend === 'Live Sync' ? 'animate-pulse' : ''}`}
+                      />
+                    ) : null}
+                    {metric.trend}
+                  </p>
+                ) : null}
+                {metric.subtext ? <p className="text-xs text-slate-500">{metric.subtext}</p> : null}
+              </div>
+            </CardContent>
+          </Card>
+        )
+      })}
     </div>
   )
 }
