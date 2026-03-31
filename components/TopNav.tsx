@@ -1,6 +1,6 @@
 'use client'
 
-import { Search, Plus, User } from 'lucide-react'
+import { Search, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/hooks/use-toast'
@@ -22,20 +22,6 @@ export function TopNav() {
 
       {/* Right Section: CTA & User */}
       <div className="flex items-center gap-4 ml-6">
-        <Button
-          className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white"
-          size="sm"
-          onClick={() => {
-            toast({
-              title: 'Request queued',
-              description: 'Routing your brief to available campus nodes...',
-            })
-          }}
-        >
-          <Plus className="w-4 h-4" />
-          Request Custom Survey
-        </Button>
-
         <div
           className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors"
           onClick={() => {

@@ -12,6 +12,15 @@ import {
   YAxis,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 const flavorData = [
   { sample: 'Sample 1', creamy: 42.19, cheesy: 17.19, tangy: 14.06, salty: 10.94, roasted: 9.38 },
@@ -67,28 +76,53 @@ function FlavorTooltip({ active, payload, label }: FlavorTooltipProps) {
 }
 
 export function FlavorMatrixChart() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Card className="border-slate-200/80 bg-white">
-      <CardHeader className="pb-2">
+    <>
+      <Card
+        className="border-slate-200/80 bg-white hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer"
+        onClick={() => setOpen(true)}
+      >
+        <CardHeader className="pb-2 flex flex-row items-start justify-between gap-4">
         <CardTitle className="text-base text-slate-900">Flavor Profile Extraction</CardTitle>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8"
+          onClick={(e) => {
+            e.stopPropagation()
+            setOpen(true)
+          }}
+        >
+          View Detailed Analysis
+        </Button>
       </CardHeader>
       <CardContent>
         <div className="mt-4">
           <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={flavorData} margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
+              <BarChart
+                data={flavorData}
+                stackOffset="expand"
+                margin={{ top: 10, right: 10, left: 0, bottom: 10 }}
+              >
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="sample" stroke="#64748b" style={{ fontSize: '12px' }} />
-              <YAxis stroke="#64748b" style={{ fontSize: '12px' }} />
+              <YAxis
+                tickFormatter={(value) => `${Math.round(value * 100)}%`}
+                stroke="#64748b"
+                style={{ fontSize: '12px' }}
+              />
               <Tooltip content={<FlavorTooltip />} />
               <Legend wrapperStyle={{ fontSize: '12px' }} />
               {flavorSeries.map((series) => (
-                <Bar key={series.key} dataKey={series.key} name={series.label} stackId="flavor">
+                <Bar key={series.key} dataKey={series.key} name={series.label} stackId="a">
                   {flavorData.map((entry, index) => (
                     <Cell
                       key={`${entry.sample}-${series.key}-${index}`}
-                      fill={entry.sample === 'Sample 3' ? series.color : '#94a3b8'}
-                      fillOpacity={entry.sample === 'Sample 3' ? 1 : 0.55}
+                      fill={series.color}
+                      fillOpacity={entry.sample === 'Sample 3' ? 1 : 0.65}
                     />
                   ))}
                 </Bar>
@@ -98,6 +132,28 @@ export function FlavorMatrixChart() {
           </div>
         </div>
       </CardContent>
-    </Card>
+      </Card>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Flavor matrix — detailed interpretation</DialogTitle>
+            <DialogDescription>
+              Why Sample 3 wins the “palate mechanics” battle in Cream & Onion.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 text-sm text-slate-700">
+            <p>
+              <span className="font-semibold text-slate-900">Sample 3’s polarizing tangy/acidic profile</span> acts as a
+              palate cleanser and creates a memorable “reset” effect—this is a loyalty driver, not just a taste score.
+            </p>
+            <p>
+              <span className="font-semibold text-slate-900">Sample 2 shows palate fatigue risk.</span> Excess creamy /
+              cheesy notes can saturate quickly, turning high initial acceptability into weaker repeat intent.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }

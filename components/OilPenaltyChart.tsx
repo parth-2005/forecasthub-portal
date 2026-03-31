@@ -12,13 +12,29 @@ import {
   YAxis,
 } from 'recharts'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 const oilPenaltyData = [
   { sample: 'Sample 1', penalty: 0.11 },
   { sample: 'Sample 2', penalty: 0.03 },
-  { sample: 'Sample 3', penalty: -0.003 },
+  { sample: 'Sample 3', penalty: 0 },
   { sample: 'Sample 4', penalty: -1.33 },
 ]
+
+const sampleColorMap: Record<string, string> = {
+  'Sample 1': '#64748b', // slate
+  'Sample 2': '#1e3a8a', // navy
+  'Sample 3': '#0ea5e9', // sky
+  'Sample 4': '#a855f7', // purple
+}
 
 interface OilTooltipEntry {
   payload?: {
@@ -48,12 +64,29 @@ function OilPenaltyTooltip({ active, payload, label }: OilTooltipProps) {
 }
 
 export function OilPenaltyChart() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <Card className="border-slate-200/80 bg-white">
-      <CardHeader className="pb-2">
+    <>
+      <Card
+        className="border-slate-200/80 bg-white hover:shadow-lg hover:border-primary/50 transition-all cursor-pointer"
+        onClick={() => setOpen(true)}
+      >
+        <CardHeader className="pb-2 flex flex-row items-start justify-between gap-4">
         <CardTitle className="text-base text-slate-900">
           Manufacturing Audit: Fryer Oil Retention
         </CardTitle>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8"
+          onClick={(e) => {
+            e.stopPropagation()
+            setOpen(true)
+          }}
+        >
+          View Detailed Analysis
+        </Button>
       </CardHeader>
       <CardContent>
         <div className="mt-4">
@@ -73,7 +106,8 @@ export function OilPenaltyChart() {
                 {oilPenaltyData.map((entry) => (
                   <Cell
                     key={entry.sample}
-                    fill={entry.penalty < 0 ? '#dc2626' : '#64748b'}
+                    fill={sampleColorMap[entry.sample] ?? '#94a3b8'}
+                    fillOpacity={entry.sample === 'Sample 3' ? 1 : 0.85}
                   />
                 ))}
               </Bar>
@@ -82,6 +116,28 @@ export function OilPenaltyChart() {
           </div>
         </div>
       </CardContent>
-    </Card>
+      </Card>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>Oil penalty — detailed interpretation</DialogTitle>
+            <DialogDescription>
+              Why Sample 4 is a “pull now” event from a manufacturing standpoint.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3 text-sm text-slate-700">
+            <p>
+              <span className="font-semibold text-slate-900">Sample 4 shows a catastrophic -1.33 heavy-oiliness penalty</span>
+              , consistent with fryer calibration and oil drainage failure.
+            </p>
+            <p>
+              This defect drives rancid notes, suppressed crunch, and fast consumer rejection—making the product
+              commercially unviable even with marketing support.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   )
 }
