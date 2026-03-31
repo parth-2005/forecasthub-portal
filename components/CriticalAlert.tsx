@@ -1,8 +1,13 @@
+'use client'
+
 import { AlertTriangle } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 export function CriticalAlert() {
+  const router = useRouter()
+
   return (
     <Alert
       variant="destructive"
@@ -23,6 +28,7 @@ export function CriticalAlert() {
         <Button
           variant="destructive"
           className="h-8 whitespace-nowrap px-3 text-xs font-semibold uppercase tracking-wide"
+          onClick={() => router.push('/market-risk')}
         >
           View Audit Details
         </Button>

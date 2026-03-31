@@ -4,6 +4,7 @@ import { PortalLayout } from '@/components/PortalLayout'
 import { ActiveDeploymentsTable } from '@/components/ActiveDeploymentsTable'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
+import { toast } from '@/hooks/use-toast'
 
 export default function MyDeploymentsPage() {
   return (
@@ -20,6 +21,12 @@ export default function MyDeploymentsPage() {
           </div>
           <Button
             className="flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white"
+            onClick={() => {
+              toast({
+                title: 'Deploying survey...',
+                description: 'Pinging available nodes and reserving slots.',
+              })
+            }}
           >
             <Plus className="w-4 h-4" />
             Deploy New Campus Survey

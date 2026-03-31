@@ -2,6 +2,7 @@
 
 import { PortalLayout } from '@/components/PortalLayout'
 import { Bookmark } from 'lucide-react'
+import { toast } from '@/hooks/use-toast'
 
 export default function SavedReportsPage() {
   const savedReports = [
@@ -30,6 +31,12 @@ export default function SavedReportsPage() {
             <div
               key={report.id}
               className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-md transition-shadow cursor-pointer flex items-start justify-between"
+              onClick={() => {
+                toast({
+                  title: 'Opening report (simulated)',
+                  description: report.title,
+                })
+              }}
             >
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">{report.title}</h3>

@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { BarChart3, Grid3x3, Lock, Bookmark, Radio, LogOut } from 'lucide-react'
+import { BarChart3, Grid3x3, ShieldAlert, Microscope, LogOut, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { toast } from '@/hooks/use-toast'
 
 export function Sidebar() {
   const pathname = usePathname()
@@ -17,8 +18,18 @@ export function Sidebar() {
   const navItems = [
     {
       href: '/dashboard',
-      label: 'Terminal Home',
+      label: 'Executive Dashboard',
       icon: BarChart3,
+    },
+    {
+      href: '/sensory-deconstruction',
+      label: 'Sensory Deconstruction',
+      icon: Microscope,
+    },
+    {
+      href: '/market-risk',
+      label: 'Market Risk Alerts',
+      icon: ShieldAlert,
     },
     {
       href: '/market-categories',
@@ -27,28 +38,18 @@ export function Sidebar() {
     },
     {
       href: '/my-surveys',
-      label: 'My Paid Surveys',
+      label: 'Live Operations',
       icon: Lock,
-      badge: 'Pro',
+      badge: 'Live',
     },
-    {
-      href: '/saved-reports',
-      label: 'Saved Reports',
-      icon: Bookmark,
-    }
-    // {
-    //   href: '/network-status',
-    //   label: 'Node Network Status',
-    //   icon: Radio,
-    // },
   ]
 
   return (
     <div className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen">
       {/* Header */}
       <div className="p-6 border-b border-gray-200">
-        <h1 className="text-lg font-bold text-gray-900">MarketIntel</h1>
-        <p className="text-xs text-gray-500 mt-1">F&B Intelligence Terminal</p>
+        <h1 className="text-lg font-bold text-gray-900">ForecastHub</h1>
+        <p className="text-xs text-gray-500 mt-1">Sensory Intelligence Portal</p>
       </div>
 
       {/* Navigation */}
@@ -85,7 +86,15 @@ export function Sidebar() {
           <p className="text-xs text-gray-500 uppercase tracking-wide">Logged in as</p>
           <p className="text-sm font-semibold text-gray-900 mt-1">FMCG R&D Team</p>
         </div>
-        <button className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors">
+        <button
+          className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+          onClick={() => {
+            toast({
+              title: 'Session ended (simulated)',
+              description: 'In production this would sign you out securely.',
+            })
+          }}
+        >
           <LogOut className="w-4 h-4" />
           Sign Out
         </button>

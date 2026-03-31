@@ -8,6 +8,7 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
+import { toast } from '@/hooks/use-toast'
 
 interface MetricItem {
   title: string
@@ -72,7 +73,13 @@ export function PlatformMetricCard() {
         return (
           <Card
             key={metric.title}
-            className="border-slate-200/80 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+            className="border-slate-200/80 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md cursor-pointer hover:border-primary/50 hover:shadow-lg"
+            onClick={() => {
+              toast({
+                title: metric.title,
+                description: 'Drilling down into the underlying node signals (simulated).',
+              })
+            }}
           >
             <CardContent className="p-4 space-y-3">
               <div className="flex items-start justify-between gap-4">

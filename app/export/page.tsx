@@ -3,6 +3,7 @@
 import { PortalLayout } from '@/components/PortalLayout'
 import { Download, FileJson, FileText, Database, CheckCircle, Clock, Lock } from 'lucide-react'
 import { useState } from 'react'
+import { toast } from '@/hooks/use-toast'
 
 export default function ExportPage() {
   const [expandedSection, setExpandedSection] = useState<string | null>('primary')
@@ -129,6 +130,12 @@ export default function ExportPage() {
                 <button
                   key={option.label}
                   className="border border-indigo-300 bg-white rounded-lg p-4 hover:bg-indigo-50 transition-colors text-left"
+                  onClick={() => {
+                    toast({
+                      title: 'Format selected',
+                      description: `${option.label} export templates will be used for downloads.`,
+                    })
+                  }}
                 >
                   <div className="flex items-start gap-3">
                     <Icon className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
@@ -194,6 +201,12 @@ export default function ExportPage() {
                       <button
                         key={format}
                         className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-2"
+                        onClick={() => {
+                          toast({
+                            title: 'Preparing download...',
+                            description: `${dataset.name} → ${format} (simulated export job).`,
+                          })
+                        }}
                       >
                         <Download className="w-4 h-4" />
                         Download {format}

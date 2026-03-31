@@ -1,6 +1,8 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { toast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation'
 
 interface CategoryData {
   name: string
@@ -31,6 +33,8 @@ function getTextColorByScore(score: number): string {
 }
 
 export function MarketCategoryHeatmap() {
+  const router = useRouter()
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -40,6 +44,17 @@ export function MarketCategoryHeatmap() {
             className={`border-2 bg-white cursor-pointer transition-all hover:shadow-md ${getColorByScore(
               category.stickiness
             )}`}
+            onClick={() => {
+              if (category.name === 'Salty Snacks') {
+                router.push('/dashboard')
+                return
+              }
+
+              toast({
+                title: 'Segment locked',
+                description: 'Contact Sales to unlock this category intelligence.',
+              })
+            }}
           >
             <CardHeader className="pb-3">
               <CardTitle className="text-base text-slate-900">

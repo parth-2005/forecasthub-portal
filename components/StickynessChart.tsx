@@ -62,27 +62,29 @@ export function StickinessChart() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full mt-4">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={stickinessData} margin={{ top: 8, right: 16, left: 0, bottom: 12 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis
-              dataKey="sample"
-              stroke="#64748b"
-              style={{ fontSize: '12px', fontWeight: 500 }}
-            />
-            <YAxis domain={[0, 100]} stroke="#64748b" style={{ fontSize: '12px' }} />
-            <Tooltip content={<ChartTooltip />} cursor={{ fill: 'rgba(148, 163, 184, 0.12)' }} />
-            <Bar dataKey="score" radius={[10, 10, 0, 0]} name="Stickiness Score">
-              {stickinessData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={entry.sample === 'Sample 3' ? '#0ea5e9' : '#94a3b8'}
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="mt-4">
+          <div className="h-[320px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={stickinessData} margin={{ top: 8, right: 16, left: 0, bottom: 12 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis
+                dataKey="sample"
+                stroke="#64748b"
+                style={{ fontSize: '12px', fontWeight: 500 }}
+              />
+              <YAxis domain={[0, 100]} stroke="#64748b" style={{ fontSize: '12px' }} />
+              <Tooltip content={<ChartTooltip />} cursor={{ fill: 'rgba(148, 163, 184, 0.12)' }} />
+              <Bar dataKey="score" radius={[10, 10, 0, 0]} name="Stickiness Score">
+                {stickinessData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.sample === 'Sample 3' ? '#0ea5e9' : '#94a3b8'}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          </div>
         </div>
       </CardContent>
     </Card>

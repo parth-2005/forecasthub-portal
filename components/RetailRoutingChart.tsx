@@ -71,27 +71,33 @@ export function RetailRoutingChart() {
         <CardTitle className="text-base text-slate-900">Channel Intercept & Substitution Risk</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full mt-4">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={routingData} stackOffset="expand" margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis dataKey="sample" stroke="#64748b" style={{ fontSize: '12px' }} />
-            <YAxis
-              tickFormatter={(value) => `${Math.round(value * 100)}%`}
-              stroke="#64748b"
-              style={{ fontSize: '12px' }}
-            />
-            <Tooltip content={<RoutingTooltip />} />
-            <Legend wrapperStyle={{ fontSize: '12px' }} />
-            {routingSeries.map((series) => (
-              <Bar key={series.key} dataKey={series.key} name={series.label} stackId="routing">
-                {routingData.map((entry, index) => (
-                  <Cell key={`${entry.sample}-${series.key}-${index}`} fill={series.color} />
-                ))}
-              </Bar>
-            ))}
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="mt-4">
+          <div className="h-[320px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={routingData} stackOffset="expand" margin={{ top: 10, right: 10, left: 0, bottom: 10 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis dataKey="sample" stroke="#64748b" style={{ fontSize: '12px' }} />
+              <YAxis
+                tickFormatter={(value) => `${Math.round(value * 100)}%`}
+                stroke="#64748b"
+                style={{ fontSize: '12px' }}
+              />
+              <Tooltip content={<RoutingTooltip />} />
+              <Legend wrapperStyle={{ fontSize: '12px' }} />
+              {routingSeries.map((series) => (
+                <Bar key={series.key} dataKey={series.key} name={series.label} stackId="routing">
+                  {routingData.map((entry, index) => (
+                    <Cell
+                      key={`${entry.sample}-${series.key}-${index}`}
+                      fill={entry.sample === 'Sample 3' ? series.color : '#94a3b8'}
+                      fillOpacity={entry.sample === 'Sample 3' ? 1 : 0.55}
+                    />
+                  ))}
+                </Bar>
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
+          </div>
         </div>
       </CardContent>
     </Card>

@@ -65,7 +65,7 @@ export function SensoryRadarChart() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[400px] w-full">
+        <div className="h-[320px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart data={radarData} margin={{ top: 20, right: 80, bottom: 20, left: 80 }}>
               <PolarGrid stroke="#e2e8f0" />

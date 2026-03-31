@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
 import { Plus } from 'lucide-react'
+import { toast } from '@/hooks/use-toast'
 
 interface DeploymentRow {
   projectId: string
@@ -68,6 +69,12 @@ export function ActiveDeploymentsTable() {
             <Button
               size="sm"
               className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white"
+              onClick={() => {
+                toast({
+                  title: 'Request created',
+                  description: 'Drafting a new node brief and estimating completion time.',
+                })
+              }}
             >
               <Plus className="w-4 h-4" />
               New Intelligence Request
@@ -102,7 +109,16 @@ export function ActiveDeploymentsTable() {
             </TableHeader>
             <TableBody>
               {deployments.map((deployment) => (
-                <TableRow key={deployment.projectId} className="hover:bg-slate-50">
+                <TableRow
+                  key={deployment.projectId}
+                  className="hover:bg-slate-50 cursor-pointer"
+                  onClick={() => {
+                    toast({
+                      title: `Opening ${deployment.projectId} (simulated)`,
+                      description: `Status: ${deployment.status} • ${deployment.completion}% complete`,
+                    })
+                  }}
+                >
                   <TableCell className="font-semibold text-slate-900">{deployment.projectId}</TableCell>
                   <TableCell className="text-sm text-slate-700">{deployment.category}</TableCell>
                   <TableCell className="text-sm text-slate-600">{deployment.demographics}</TableCell>

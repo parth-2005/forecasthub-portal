@@ -56,28 +56,30 @@ export function OilPenaltyChart() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="h-[300px] w-full mt-4">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-            data={oilPenaltyData}
-            layout="vertical"
-            margin={{ top: 6, right: 16, left: 16, bottom: 6 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis type="number" domain={[-1.5, 0.2]} stroke="#64748b" style={{ fontSize: '12px' }} />
-            <YAxis type="category" dataKey="sample" stroke="#64748b" style={{ fontSize: '12px' }} width={70} />
-            <ReferenceLine x={0} stroke="#334155" strokeWidth={1.5} />
-            <Tooltip content={<OilPenaltyTooltip />} />
-            <Bar dataKey="penalty" radius={[0, 6, 6, 0]}>
-              {oilPenaltyData.map((entry) => (
-                <Cell
-                  key={entry.sample}
-                  fill={entry.penalty < 0 ? '#dc2626' : '#64748b'}
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="mt-4">
+          <div className="h-[320px] w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+              data={oilPenaltyData}
+              layout="vertical"
+              margin={{ top: 6, right: 16, left: 16, bottom: 6 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <XAxis type="number" domain={[-1.5, 0.2]} stroke="#64748b" style={{ fontSize: '12px' }} />
+              <YAxis type="category" dataKey="sample" stroke="#64748b" style={{ fontSize: '12px' }} width={70} />
+              <ReferenceLine x={0} stroke="#334155" strokeWidth={1.5} />
+              <Tooltip content={<OilPenaltyTooltip />} />
+              <Bar dataKey="penalty" radius={[0, 6, 6, 0]}>
+                {oilPenaltyData.map((entry) => (
+                  <Cell
+                    key={entry.sample}
+                    fill={entry.penalty < 0 ? '#dc2626' : '#64748b'}
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          </div>
         </div>
       </CardContent>
     </Card>
