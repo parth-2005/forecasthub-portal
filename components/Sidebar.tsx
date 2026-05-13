@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { BarChart3, Grid3x3, ShieldAlert, Microscope, LogOut, Lock } from 'lucide-react'
+import { BarChart3, Grid3x3, ShieldAlert, Microscope, LogOut, Lock, BookOpen } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { toast } from '@/hooks/use-toast'
 
@@ -37,10 +37,15 @@ export function Sidebar() {
       icon: Grid3x3,
     },
     {
+      href: '/methodology',
+      label: 'Methodology',
+      icon: BookOpen,
+    },
+    {
       href: '/my-surveys',
-      label: 'Live Operations',
+      label: 'Study Deployments',
       icon: Lock,
-      badge: 'Live',
+      badge: 'Pilot',
     },
   ]
 
@@ -48,8 +53,8 @@ export function Sidebar() {
     <div className="w-64 bg-white border-r border-gray-200 flex flex-col h-screen">
       {/* Header */}
       <div className="p-6 border-b border-gray-200">
-        <h1 className="text-lg font-bold text-gray-900">ForecastHub</h1>
-        <p className="text-xs text-gray-500 mt-1">Sensory Intelligence Portal</p>
+        <h1 className="text-lg font-bold text-gray-900">LOGIQ</h1>
+        <p className="text-xs text-gray-500 mt-1">Research Portal — Pilot Study</p>
       </div>
 
       {/* Navigation */}

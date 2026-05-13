@@ -34,26 +34,18 @@ const deployments: DeploymentRow[] = [
     completion: 100,
   },
   {
-    projectId: 'LOC-904',
-    category: 'Energy Drinks',
-    demographics: 'Tier-2 Tech Campuses',
-    activeNodes: '12 Universities',
-    status: 'Data Collection',
-    completion: 65,
-  },
-  {
-    projectId: 'LOC-911',
-    category: 'Instant Noodles',
-    demographics: 'Pan-India Liberal Arts',
-    activeNodes: 'Pending Allocation',
-    status: 'Drafting Survey',
+    projectId: 'LOC-TBD',
+    category: 'Category TBD',
+    demographics: '—',
+    activeNodes: 'Pending client brief',
+    status: 'Draft',
     completion: 0,
   },
 ]
 
 function getStatusBadgeVariant(status: string): 'default' | 'secondary' | 'destructive' | 'outline' {
   if (status === 'Analysis Complete') return 'default'
-  if (status === 'Data Collection') return 'secondary'
+  if (status === 'Draft') return 'secondary'
   return 'outline'
 }
 
@@ -129,10 +121,16 @@ export function ActiveDeploymentsTable() {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="w-full space-y-1">
-                      <Progress value={deployment.completion} className="h-2" />
-                      <p className="text-xs text-slate-600">{deployment.completion}%</p>
-                    </div>
+                    {deployment.status === 'Draft' ? (
+                      <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">
+                        Upcoming
+                      </Badge>
+                    ) : (
+                      <div className="w-full space-y-1">
+                        <Progress value={deployment.completion} className="h-2" />
+                        <p className="text-xs text-slate-600">{deployment.completion}%</p>
+                      </div>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

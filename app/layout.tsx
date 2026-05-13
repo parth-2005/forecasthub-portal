@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Sensory Market Intelligence | Client Portal',
+  title: 'LOGIQ Research Portal',
   description: 'Enterprise sensory analysis and market research portal',
   generator: 'v0.app',
   icons: {

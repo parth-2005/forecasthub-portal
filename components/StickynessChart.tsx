@@ -69,10 +69,10 @@ export function StickinessChart() {
 
   const data = useMemo(
     () => [
-      { sample: 'Sample 1', quality: 48.5, loyalty: 61.67, note: 'Mass-market baseline ("Safe Habit")' },
-      { sample: 'Sample 2', quality: 51.5, loyalty: 60.58, note: 'High quality, but not differentiated enough' },
-      { sample: 'Sample 3', quality: 46.5, loyalty: 76.56, note: 'Cult Classic: polarizing but intensely loyal' },
-      { sample: 'Sample 4', quality: 36.5, loyalty: 42.19, note: 'Warning: rejected due to manufacturing defect signals' },
+      { sample: 'Sample 1', quality: 53.75, loyalty: 61.67, note: 'Mass-market baseline — widely accepted, low emotional loyalty' },
+      { sample: 'Sample 2', quality: 55.08, loyalty: 60.58, note: 'Highest base taste, but high substitution risk if competitor is closer' },
+      { sample: 'Sample 3', quality: 48.18, loyalty: 76.56, note: 'Cult Classic — polarising profile, fiercely loyal minority' },
+      { sample: 'Sample 4', quality: 35.29, loyalty: 42.19, note: 'Manufacturing defect detected — oiliness penalty -1.33' },
     ],
     [],
   )

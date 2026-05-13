@@ -24,42 +24,38 @@ interface MetricItem {
 
 const metrics: MetricItem[] = [
   {
-    title: 'Verified Campus Nodes',
+    title: 'Verified respondents',
     value: '44',
-    label: 'Active Ground Nodes',
-    trend: '+12% this month',
-    icon: TrendingUp,
+    label: 'Double-blind, honesty-weighted',
+    trend: 'Pilot study · March 2026',
+    icon: Target,
     iconClass: 'text-emerald-600 bg-emerald-50',
-    trendIcon: ArrowUpRight,
-    trendClass: 'text-emerald-600',
   },
   {
-    title: 'Distinct Evaluations',
+    title: 'Distinct evaluations',
     value: '176',
-    label: 'Double-Blind Sensory Tests',
-    trend: 'High Confidence',
+    label: '4 samples × 44 participants',
+    trend: '93% honesty check pass rate',
     icon: CheckCircle2,
     iconClass: 'text-blue-600 bg-blue-50',
     trendIcon: CheckCircle2,
     trendClass: 'text-blue-600',
   },
   {
-    title: 'Active Market Signals',
-    value: '12,450',
-    label: 'Passive Social/Digital Data Points',
-    trend: 'Live Sync',
-    icon: Activity,
+    title: 'Data quality score',
+    value: '93%',
+    label: 'Respondents passed honesty check',
+    trend: '3 flagged, weighted down',
+    icon: CheckCircle2,
     iconClass: 'text-cyan-600 bg-cyan-50',
-    trendIcon: Activity,
-    trendClass: 'text-cyan-600',
   },
   {
-    title: 'Category Focus',
+    title: 'Study category',
     value: 'Salty Snacks',
-    label: 'Cream & Onion Segment',
+    label: 'Cream & Onion segment',
     icon: Target,
     iconClass: 'text-violet-600 bg-violet-50',
-    subtext: 'Sample Size n=4',
+    subtext: 'n=4 competing SKUs',
   },
 ]
 
@@ -97,7 +93,7 @@ export function PlatformMetricCard() {
                   <p className={`flex items-center gap-1 text-xs font-semibold ${metric.trendClass}`}>
                     {TrendIcon ? (
                       <TrendIcon
-                        className={`h-3.5 w-3.5 ${metric.trend === 'Live Sync' ? 'animate-pulse' : ''}`}
+                        className={`h-3.5 w-3.5`}
                       />
                     ) : null}
                     {metric.trend}

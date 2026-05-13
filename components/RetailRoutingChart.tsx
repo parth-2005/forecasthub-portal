@@ -23,10 +23,10 @@ import {
 } from '@/components/ui/dialog'
 
 const routingData = [
-  { sample: 'Sample 1', vending: 13.33, skip: 60.0, walk: 26.67 },
-  { sample: 'Sample 2', vending: 38.46, skip: 15.38, walk: 46.15 },
-  { sample: 'Sample 3', vending: 8.33, skip: 33.33, walk: 58.33 },
-  { sample: 'Sample 4', vending: 25.0, skip: 75.0, walk: 0 },
+  { sample: 'S1', vending: 13.33, skip: 60.00, walk: 26.67 },
+  { sample: 'S2', vending: 38.46, skip: 15.38, walk: 46.15 },
+  { sample: 'S3', vending: 8.33,  skip: 33.33, walk: 58.33 },
+  { sample: 'S4', vending: 25.00, skip: 75.00, walk: 0.00  },
 ]
 
 const routingSeries = [

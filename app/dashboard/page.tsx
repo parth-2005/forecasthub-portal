@@ -9,6 +9,8 @@ import { FlavorMatrixChart } from '@/components/FlavorMatrixChart'
 import { TextureChart } from '@/components/TextureChart'
 import { OilPenaltyChart } from '@/components/OilPenaltyChart'
 import { IntelligenceReportCard } from '@/components/IntelligenceReportCard'
+import { SchoolPreferenceChart } from '@/components/SchoolPreferenceChart'
+import { YearPreferenceChart } from '@/components/YearPreferenceChart'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function DashboardPage() {
@@ -36,6 +38,9 @@ export default function DashboardPage() {
             <TabsTrigger value="manufacturing-rd" className="px-3">
               Manufacturing & R&D
             </TabsTrigger>
+            <TabsTrigger value="segment-analysis" className="px-3">
+              Segment Analysis
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="market-mechanics">
@@ -59,6 +64,13 @@ export default function DashboardPage() {
                 <OilPenaltyChart />
                 <IntelligenceReportCard />
               </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="segment-analysis">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <SchoolPreferenceChart />
+              <YearPreferenceChart />
             </div>
           </TabsContent>
         </Tabs>

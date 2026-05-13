@@ -23,10 +23,10 @@ import {
 } from '@/components/ui/dialog'
 
 const flavorData = [
-  { sample: 'Sample 1', creamy: 42.19, cheesy: 17.19, tangy: 14.06, salty: 10.94, roasted: 9.38 },
-  { sample: 'Sample 2', creamy: 38.96, cheesy: 29.87, tangy: 15.58, salty: 6.49, roasted: 7.79 },
-  { sample: 'Sample 3', creamy: 26.25, cheesy: 25.0, tangy: 18.75, salty: 11.25, roasted: 7.5 },
-  { sample: 'Sample 4', creamy: 21.05, cheesy: 13.16, tangy: 28.95, salty: 11.84, roasted: 17.11 },
+  { sample: 'S1', creamy: 42.62, cheesy: 18.03, tangy: 14.06, salty: 10.94, roasted: 9.38 },
+  { sample: 'S2', creamy: 39.19, cheesy: 29.73, tangy: 15.58, salty: 6.49,  roasted: 7.79 },
+  { sample: 'S3', creamy: 25.00, cheesy: 25.00, tangy: 19.74, salty: 11.84, roasted: 11.25 },
+  { sample: 'S4', creamy: 21.05, cheesy: 13.16, tangy: 28.95, salty: 11.84, roasted: 17.11 },
 ]
 
 const flavorSeries = [

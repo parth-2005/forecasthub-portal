@@ -13,7 +13,7 @@ export default function ExportPage() {
       id: 'primary',
       name: 'Primary Sensory Evaluations',
       description: 'Raw sensory scores from all 176 evaluations (44 students × 4 samples)',
-      fileSize: '2.4 MB',
+      fileSize: '48 KB',
       records: '176 complete evaluations',
       formats: ['CSV', 'JSON', 'Excel'],
       status: 'ready',
@@ -31,7 +31,7 @@ export default function ExportPage() {
       id: 'statistical',
       name: 'Statistical Summary & Aggregations',
       description: 'Computed means, medians, standard deviations, and confidence intervals',
-      fileSize: '1.2 MB',
+      fileSize: '12 KB',
       records: '24 aggregate metrics',
       formats: ['CSV', 'Excel', 'PDF'],
       status: 'ready',
@@ -49,7 +49,7 @@ export default function ExportPage() {
       id: 'environmental',
       name: 'Environmental & Contextual Data',
       description: 'Testing conditions, student metadata, and environmental factors',
-      fileSize: '890 KB',
+      fileSize: '18 KB',
       records: '44 student profiles + 176 session logs',
       formats: ['CSV', 'JSON'],
       status: 'ready',
@@ -85,7 +85,7 @@ export default function ExportPage() {
       id: 'sample4_deep',
       name: 'Sample 4 Deep-Dive Analysis',
       description: 'Failure analysis dataset: Why Sample 4 failed systematically',
-      fileSize: '1.8 MB',
+      fileSize: '54 KB',
       records: '176 Sample 4 evaluations with annotations',
       formats: ['CSV', 'JSON', 'Excel'],
       status: 'ready',
@@ -116,7 +116,7 @@ export default function ExportPage() {
       <div className="p-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Export Raw Data</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Export — Pilot Study Data</h1>
           <p className="text-gray-600 mt-2">Download comprehensive datasets, raw evaluations, and analytical outputs</p>
         </div>
 
@@ -238,7 +238,7 @@ export default function ExportPage() {
         </div>
 
         {/* Data Analysis Support */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-3">Analysis Templates</h3>
             <p className="text-sm text-gray-600 mb-4">Pre-built Excel/R templates for common analyses:</p>
@@ -258,29 +258,6 @@ export default function ExportPage() {
               <li className="flex items-center gap-2">
                 <span className="text-indigo-600">→</span>
                 <span>Time-series forecasting (market adoption)</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">API Access</h3>
-            <p className="text-sm text-gray-600 mb-4">Programmatic access to raw data for automated workflows:</p>
-            <ul className="space-y-2 text-sm text-gray-700">
-              <li className="flex items-center gap-2">
-                <span className="text-indigo-600">→</span>
-                <span>REST API with OAuth 2.0 authentication</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-indigo-600">→</span>
-                <span>Pagination & filtering for large datasets</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-indigo-600">→</span>
-                <span>Webhook notifications on data updates</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-indigo-600">→</span>
-                <span>Rate limiting: 1000 req/hour per API key</span>
               </li>
             </ul>
           </div>
